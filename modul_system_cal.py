@@ -41,13 +41,12 @@ def uncode_system_calculator(inp_sys: str, inp_text: str):
     """
     try:
         base = int(inp_sys)
-        num = int(inp_text)
         if base < 2:
             return "Unsupported system. Please use base 2 or higher."
         if base < 0:
             return "Unsupported number. Please use non-negative integers."
         else:
-            return str(int(str(num), base))
+            return str(int(str(inp_text), base))
     except TypeError:
         print('Not an integer! TypeError')
     except ValueError:
@@ -57,15 +56,12 @@ def uncode_system_calculator(inp_sys: str, inp_text: str):
 
 
 if __name__ == '__main__':
-    # print("The test of changing base of number from X to 10")
-    # base_in = input("Enter base of system: ")
-    # num = input("Enter a number for changing base: ")
-    # print(system_calculator(base_in, num))
-    #
-    # print("The test of changing base of number from 10 to X")
-    # base = input("Enter base of system: ")
-    # num_in = input("Enter a number for changing base: ")
-    # print(uncode_system_calculator(base, num_in))
-    print(system_calculator("8", "10"))
+    print("The test of changing base of number from X to 10")
+    base_in = input("Enter base of system: ")
+    num = input("Enter a number for changing base: ")
+    print(system_calculator(base_in, num))
 
-
+    print("The test of changing base of number from 10 to X")
+    base = input("Enter base of system: ")
+    num_in = input("Enter a number for changing base: ")
+    print(uncode_system_calculator(base, num_in))
