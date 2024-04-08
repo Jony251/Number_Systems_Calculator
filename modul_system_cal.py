@@ -1,21 +1,21 @@
-def print_system_calculator(sys, input):
+def system_calculator(inp_sys: str, inp_text: str) -> str:
     """
     Converts a number from base 10 to another base specified by sys.
-
-    :param sys: The base to convert the number to.
-    :param input: The number to convert.
-    :return: The converted number as a string.
+    :param inp_sys: String -> The base to convert number to.
+    :param inp_text: String -> The number to convert from base 10 to inp_sys.
+    :return: Converted number as a string.
     """
+    symbols = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    n = len(symbols)
     try:
-        base = int(sys)
-        num = int(input)
+        base = int(inp_sys)
+        num = int(inp_text)
         if base < 2:
             return "Unsupported system. Please use base 2 or higher."
         if num < 0:
             return "Unsupported number. Please use non-negative integers."
 
-        symbols = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        if base > len(symbols):
+        if base > n:
             return "Unsupported system. Please use a smaller base."
 
         digits = []
@@ -24,38 +24,48 @@ def print_system_calculator(sys, input):
             num //= base
 
         return "".join(digits[::-1])
+    except TypeError:
+        print('Not an integer! TypeError S')
+    except ValueError:
+        print('Not an integer! ValueError S')
     except BaseException as s:
         print("The exception is: ", s)
 
 
-def uncode_system_calculator(sys, num):
+def uncode_system_calculator(inp_sys: str, inp_text: str):
     """
     Converts a number from a specified base to base 10.
-
-    :param sys: The base of the input number.
-    :param num: The number to convert.
+    :param inp_sys: String -> The base to convert number to.
+    :param inp_text: String -> The number to convert.
     :return: The converted number as an integer.
     """
-    base = int(sys)
     try:
+        base = int(inp_sys)
+        num = int(inp_text)
         if base < 2:
             return "Unsupported system. Please use base 2 or higher."
         if base < 0:
             return "Unsupported number. Please use non-negative integers."
         else:
-            str_num = str(num)
-            return int(str_num, base)
-    except BaseException:
-        return int(num, base)
+            return str(int(str(num), base))
+    except TypeError:
+        print('Not an integer! TypeError')
+    except ValueError:
+        print('Not an integer! ValueError')
+    except BaseException as s:
+        print("The exception is: ", s)
 
 
 if __name__ == '__main__':
-    print("The test of changing base of number from X to 10")
-    sys = input("Enter base of system: ")
-    num = input("Enter a number for changing base: ")
-    print(print_system_calculator(sys, num))
+    # print("The test of changing base of number from X to 10")
+    # base_in = input("Enter base of system: ")
+    # num = input("Enter a number for changing base: ")
+    # print(system_calculator(base_in, num))
+    #
+    # print("The test of changing base of number from 10 to X")
+    # base = input("Enter base of system: ")
+    # num_in = input("Enter a number for changing base: ")
+    # print(uncode_system_calculator(base, num_in))
+    print(system_calculator("8", "10"))
 
-    print("The test of changing base of number from 10 to X")
-    base = input("Enter base of system: ")
-    num_in = input("Enter a number for changing base: ")
-    print(uncode_system_calculator(base, num_in))
+

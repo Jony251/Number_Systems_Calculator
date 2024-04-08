@@ -2,10 +2,7 @@ from PyQt5.QtCore import Qt, QSize
 import modul_system_cal
 import modul_log
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QDialog, QVBoxLayout, QRadioButton, QLabel, \
-    QLineEdit, QStyle
-
-
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QDialog, QVBoxLayout, QRadioButton,QLineEdit, QStyle, QLabel
 
 
 class MainWindow(QMainWindow):
@@ -14,67 +11,70 @@ class MainWindow(QMainWindow):
         Initializing the main application window.
         """
         super().__init__()
+
         self.setWindowTitle("Base Change App")
         # Set the window size to the center of the screen
         self.setGeometry(QStyle.alignedRect(Qt.LeftToRight, Qt.AlignCenter, QSize(600, 280),
                                             QApplication.desktop().availableGeometry()))
+        self.init_ui()  # вызываем метод инициализации интерфейса
 
-        self.label_input = QLabel("Chose a method:", self)
-        self.label_input.move(50, 25)
+        self.label_сhose = QLabel("Chose a method:", self)
+        self.label_сhose.move(50, 120)
 
         # Create radio buttons to select the encoding method
-        self.radio_button1 = QRadioButton("Dec", self)
-        self.radio_button1.move(50, 55)
-        self.radio_button1.setChecked(True)
+        self.radio_but_dec = QRadioButton("Dec", self)
+        self.radio_but_dec.move(50, 160)
+        self.radio_but_dec.setChecked(True)
 
-        self.radio_button2 = QRadioButton("Oct", self)
-        self.radio_button2.move(125, 55)
+        self.radio_but_oct = QRadioButton("Oct", self)
+        self.radio_but_oct.move(125, 160)
 
-        self.radio_button3 = QRadioButton("Hex", self)
-        self.radio_button3.move(200, 55)
+        self.radio_but_hex = QRadioButton("Hex", self)
+        self.radio_but_hex.move(200, 160)
 
-        self.radio_button4 = QRadioButton("Bin", self)
-        self.radio_button4.move(275, 55)
+        self.radio_but_bin = QRadioButton("Bin", self)
+        self.radio_but_bin.move(275, 160)
 
-        self.radio_button5 = QRadioButton("You\nOption", self)
-        self.radio_button5.move(350, 55)
+        self.radio_but_user_base = QRadioButton("You\nBase", self)
+        self.radio_but_user_base.move(350, 160)
 
         # Labels above input fields
-        self.label_input = QLabel("Input number:", self)
-        self.label_input.move(50, 80)
+        self.label_input = QLabel("Input number: ", self)
+        self.label_input.move(50, 25)
 
         self.input_box = QLineEdit(self)
-        self.input_box.move(50, 120)
+        self.input_box.move(50, 55)
 
-        self.input_box.resize(self.width() - 100, 30)  # Stretch by width and height
+        self.input_box.resize(self.width() - 100, 30)
         self.input_box.setPlaceholderText("Enter number...")
 
-        # TODO: chack if it relevant
-        # self.label_input_loop = QLabel("Input key:", self)
-        # self.label_input_loop.move(50, 155)
+        self.input_base = QLineEdit(self)
+        self.input_base.move(425, 160)
+        self.input_base.resize(100, 30)
+        self.input_base.setPlaceholderText("Your Base")
 
-        self.input_box_loop = QLineEdit(self)
-        self.input_box_loop.move(425, 50)
-        self.input_box_loop.resize(100, 30)
-        self.input_box_loop.setPlaceholderText("Your Base")
+        self.label_answer = QLabel("Your answer: ", self)
+        self.label_answer.move(200, 215)
 
-        self.label_input = QLabel("Your answer: ", self)
-        self.label_input.move(55, 160)
-
-        # Button to get an answer
+    def init_ui(self):
+        """
+        the function creates button updates the on_click
+        :return: none
+        """
         self.button = QPushButton(self)
         self.button.clicked.connect(self.on_click)
         self.button.setText("The answer")
-        self.button.move(450, 235)
+        self.button.move(425, 215)
 
-        # self.button = QPushButton("The answer", self.on_click())
-        # self.button.clicked.connect(lambda: modul_log.click(self))
-
-
-        self.text_to_show = "qwert"
+        self.label_out = QLabel(self)
+        self.label_out.move(300, 215)
 
     def on_click(self):
-        result= modul_log.click(self)
+        """
+        :return: updates the label_out, puts there the answer
+        """
+        result = modul_log.click(self)
+        self.label_out.setText(result)
 
 
 if __name__ == "__main__":
