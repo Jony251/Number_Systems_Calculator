@@ -14,20 +14,18 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("Base Change App")
         # Set the window size to the center of the screen
-        self.setGeometry(QStyle.alignedRect(Qt.LeftToRight, Qt.AlignCenter, QSize(600, 280),
+        self.setGeometry(QStyle.alignedRect(Qt.LeftToRight, Qt.AlignCenter, QSize(600, 380),
                                             QApplication.desktop().availableGeometry()))
         self.init_ui()  # вызываем метод инициализации интерфейса
 
-        self.label_сhose = QLabel("Chose a method:", self)
+        self.label_сhose = QLabel("From decimal to:", self)
         self.label_сhose.move(50, 120)
 
         # Create radio buttons to select the encoding method
-        self.radio_but_dec = QRadioButton("Dec", self)
-        self.radio_but_dec.move(50, 160)
-        self.radio_but_dec.setChecked(True)
 
         self.radio_but_oct = QRadioButton("Oct", self)
         self.radio_but_oct.move(125, 160)
+        self.radio_but_oct.setChecked(True)
 
         self.radio_but_hex = QRadioButton("Hex", self)
         self.radio_but_hex.move(200, 160)
@@ -54,7 +52,18 @@ class MainWindow(QMainWindow):
         self.input_base.setPlaceholderText("Your Base")
 
         self.label_answer = QLabel("Your answer: ", self)
-        self.label_answer.move(200, 215)
+        self.label_answer.move(200, 300)
+
+        # To decimal--------------------------------------
+
+        self.radio_but_dec = QRadioButton("Dec", self)
+        self.radio_but_dec.move(200, 200)
+
+        self.input_dec = QLineEdit(self)
+        self.input_dec.move(290, 200)
+        self.input_dec.resize(100, 30)
+        self.input_dec.setPlaceholderText("To Decimal")
+
 
     def init_ui(self):
         """
@@ -64,10 +73,10 @@ class MainWindow(QMainWindow):
         self.button = QPushButton(self)
         self.button.clicked.connect(self.on_click)
         self.button.setText("The answer")
-        self.button.move(425, 215)
+        self.button.move(425, 300)
 
         self.label_out = QLabel(self)
-        self.label_out.move(300, 215)
+        self.label_out.move(300, 300)
 
     def on_click(self):
         """
